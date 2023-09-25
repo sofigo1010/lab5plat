@@ -15,18 +15,20 @@ import com.example.lab5.ui.theme.Lab5Theme
 class MainActivity : ComponentActivity() {
     // Datos de muestra
     val sampleEvents = listOf(
-        Event("Billie Eilish", R.drawable.billiemiamor, "Happier Than Ever World Tour"),
-        Event("Bad Bunny", R.drawable.bbbello, "Un Verano Sin Ti World Tour"),
-        Event("C. Tangana", R.drawable.ctangana, "El Madrileño Presenta") ,
-        Event("Miley Cyrus", R.drawable.mileybaby, "Endless Summer Now Available"),
-        Event("SZA", R.drawable.szan, "Your ex better be hiding"),
-        Event("Labrinth", R.drawable.labrinth, "Ready to feel the euphoria vibe?"),
+        Event("Billie Eilish", R.drawable.billiemiamor, "Happier Than Ever World Tour", "10 de Octubre", "8 PM"),
+        Event("Bad Bunny", R.drawable.bbbello, "Un Verano Sin Ti World Tour", "10 de Octubre", "8 PM"),
+        Event("C. Tangana", R.drawable.ctangana, "El Madrileño Presenta", "10 de Octubre", "8 PM") ,
+        Event("Miley Cyrus", R.drawable.mileybaby, "Endless Summer Now Available", "10 de Octubre", "8 PM"),
+        Event("SZA", R.drawable.szan, "Your ex better be hiding", "10 de Octubre", "8 PM"),
+        Event("Labrinth", R.drawable.labrinth, "Ready to feel the euphoria vibe?", "10 de Octubre", "8 PM"),
     )
 
     val conciertos = listOf(
         Concierto("Billie Eilish", R.drawable.billiemiamor, "Ciudad Cayala", R.drawable.triangle),
         Concierto("Bad Bunny", R.drawable.bbbello, "Ciudad Cayala", R.drawable.triangle),
     )
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,10 +38,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //InfoConciertosScreen(events = sampleEvents) //información de los conciertos que vienen.
-                    //InfoConciertos(conciertos) // Listado de Lugares
-                    //UserProfile() //perfil
-                    DetalleComposable(titulo = "Un verano sin ti", fecha = "FECHA: 10/10", hora = "HORA: 7:30", descripcion = "Se realizará en Ciudad Cayala") //detalle del concierto
+                    NavigationHost(events = sampleEvents, concerts = conciertos)
                 }
             }
         }

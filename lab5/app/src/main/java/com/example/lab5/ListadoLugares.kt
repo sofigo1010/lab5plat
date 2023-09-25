@@ -30,20 +30,20 @@ import androidx.compose.ui.graphics.Color
 
 
 
+// Clase para representar un concierto con atributos como título, imagen, descripción e imagen derecha.
 data class Concierto(val title: String, val imageRes: Int, val description: String, val imageRightRes: Int)
 
 @Composable
 fun InfoConciertos(events: List<Concierto>) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        LazyColumn(
-            modifier = Modifier.padding(16.dp)
-        ) {
+    // Contenedor principal que ocupa todo el espacio disponible
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Columna perezosa que permite desplazarse y se usa para mostrar la lista de conciertos
+        LazyColumn(modifier = Modifier.padding(16.dp)) {
+            // Itera sobre cada concierto y muestra su información
             items(events) { concierto ->
                 Event(concierto = concierto)
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, thickness = 0.5.dp)
+                Spacer(modifier = Modifier.height(8.dp))  // Espaciado entre elementos
+                Divider(color = Color.Gray, thickness = 0.5.dp)  // Línea divisoria entre elementos
             }
         }
     }
@@ -51,25 +51,26 @@ fun InfoConciertos(events: List<Concierto>) {
 
 @Composable
 fun Event(concierto: Concierto) {
+    // Contenedor en fila para mostrar la información de un concierto
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        horizontalArrangement = Arrangement.SpaceBetween,  // Distribución de espacio entre hijos
+        verticalAlignment = Alignment.CenterVertically     // Alineación vertical al centro
     ) {
-        // Imagen a la izquierda
+        // Imagen del concierto a la izquierda
         Image(
             painter = painterResource(id = concierto.imageRes),
-            contentDescription = null,
+            contentDescription = null,  // No es necesario describir el contenido
             modifier = Modifier
                 .size(50.dp)
-                .clip(CircleShape)
+                .clip(CircleShape)       // Dar forma circular a la imagen
                 .padding(8.dp),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop  // Escalar el contenido para recortar
         )
 
-        // Columna para título y descripción
+        // Columna para mostrar el título y la descripción del concierto
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -79,27 +80,28 @@ fun Event(concierto: Concierto) {
                 text = concierto.title,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                maxLines = 2,              // Limitar a 2 líneas
+                overflow = TextOverflow.Ellipsis  // Puntos suspensivos si el texto es largo
             )
             Text(
                 text = concierto.description,
                 fontSize = 16.sp,
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis
+                maxLines = 3,              // Limitar a 3 líneas
+                overflow = TextOverflow.Ellipsis  // Puntos suspensivos si el texto es largo
             )
         }
 
-        // Imagen a la derecha
+        // Imagen del concierto a la derecha
         Image(
             painter = painterResource(id = concierto.imageRightRes),
-            contentDescription = null,
+            contentDescription = null,  // No es necesario describir el contenido
             modifier = Modifier
                 .size(50.dp)
-                .clip(CircleShape)
+                .clip(CircleShape)       // Dar forma circular a la imagen
                 .padding(8.dp),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop  // Escalar el contenido para recortar
         )
     }
 }
+
 
